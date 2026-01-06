@@ -3,40 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUNY-X | Arena Tahmin</title>
+    <title>BUNY-X | Royaledle Global</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="entrance-screen">
-        <div class="profile-section">
-            <div class="emoji-glow"></div>
-            <img src="200w.webp" alt="BUNYCR Logo" class="profile-emoji">
-            <h1 class="username">BUNYCR</h1>
-            <div class="social-icons">
-                <a href="https://youtube.com/@buny.cr19?si=LrQVU0hKWOS6E3pQ" target="_blank" class="icon-yt">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png">
-                </a>
-                <a href="https://whatsapp.com/channel/0029VbBUBjgCsU9UpLVu8e2A" target="_blank" class="icon-wp">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-                </a>
-            </div>
-        </div>
+        <img src="200w.webp" class="profile-emoji">
+        <h1 class="username">BUNYCR</h1>
         <div class="menu-box">
+            <select id="language-select" class="lang-selector">
+                <option value="tr">🇹🇷 Türkçe</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="az">🇦🇿 Azərbaycanca</option>
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="zh">🇨🇳 中文</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="jp">🇯🇵 日本語</option>
+            </select>
             <input type="text" placeholder="İSMİNİ YAZ" class="menu-input" id="player-name">
-            <button onclick="startGame()" class="btn-blue">ODA OLUŞTUR</button>
-            <button class="btn-black">KODU GİR</button>
-            <button onclick="startGame()" class="btn-green">ARENAYA KATIL</button>
+            <button onclick="showModes()" class="btn-green" id="main-btn">ARENAYA KATIL</button>
         </div>
     </div>
-    <div id="game-screen" class="hidden">
-        <h2 class="game-logo">BUNY-X</h2>
-        <div class="search-area">
-            <input type="text" id="guess-input" placeholder="Kart adını yaz..." oninput="showList(this.value)">
-            <div id="autocomplete-list"></div>
+
+    <div id="game-screen" class="hidden" style="width: 90%; max-width: 400px; text-align: center;">
+        <div id="mode-selection">
+            <h2 id="mode-title" style="color: #a855f7;">MODUNU SEÇ</h2>
+            <button onclick="startSpecificMode('pixel')" class="btn-blue" id="m-pixel" style="margin-bottom:10px;">PİKSEL MODU</button>
+            <button onclick="startSpecificMode('desc')" class="btn-green" id="m-desc" style="margin-bottom:10px;">AÇIKLAMA MODU</button>
+            <button onclick="startSpecificMode('emoji')" class="btn-black" id="m-emoji">EMOJİ MODU</button>
         </div>
-        <div id="results-table"></div>
-        <button onclick="location.reload()" class="btn-back">ANA MENÜYE DÖN</button>
+
+        <div id="active-game" class="hidden">
+            <div id="game-timer">05:00</div>
+            <div id="hint-area"></div>
+            <div class="search-area">
+                <input type="text" id="guess-input" placeholder="Kart..." oninput="showList(this.value)" class="menu-input">
+                <div id="autocomplete-list"></div>
+            </div>
+            <button onclick="surrender()" id="btn-pes" style="background: #444; margin-top:15px; font-size:0.8rem;">PES ET</button>
+            <div id="results-table" style="margin-top: 20px;"></div>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
