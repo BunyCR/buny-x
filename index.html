@@ -3,57 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <title>BUNYCR | APP</title>
-    <link rel="stylesheet" href="style.css">
+    <title>BUNYCR APP</title>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        /* RESET VE SABİTLEME */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background: #000; color: white; 
+            font-family: sans-serif; 
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; width: 100vw; overflow: hidden;
+        }
+
+        /* LOGO VE YAZI (BUNYCR Fontu) */
+        .profile-emoji { width: 100px; filter: drop-shadow(0 0 15px #a855f7); display: block; margin: 0 auto; }
+        .username { 
+            font-family: 'Permanent Marker', cursive; 
+            font-size: 2.8rem; text-align: center; 
+            margin: 5px 0; color: #fff; text-shadow: 0 0 10px #a855f7; 
+        }
+
+        /* SOSYAL MEDYA (Düzeltildi: Devasa olamaz artık) */
+        .social-box { 
+            display: flex; gap: 15px; justify-content: center; 
+            margin-bottom: 20px; background: rgba(168, 85, 247, 0.1);
+            padding: 8px 15px; border-radius: 15px; border: 1px solid #a855f7;
+            width: fit-content; margin-left: auto; margin-right: auto;
+        }
+        .social-box img { width: 30px !important; height: 30px !important; }
+
+        /* GİRİŞ VE MOD SEÇİM KUTULARI */
+        .menu-box { 
+            width: 300px; display: flex; flex-direction: column; gap: 12px; 
+            padding: 20px; border-radius: 20px; border: 2px solid #a855f7;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .lang-select, .menu-input {
+            background: #111; border: 1px solid #a855f7; color: white;
+            padding: 12px; border-radius: 12px; text-align: center; width: 100%;
+        }
+
+        .btn-green { background: #22c55e; color: white; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; }
+
+        /* BUTONLAR (ALT ALTA VE UZUN - FOTOĞRAFTAKİ GİBİ DEĞİL) */
+        .mode-container { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        .mode-btn { 
+            width: 100%; padding: 20px; border-radius: 15px; border: none; 
+            color: white; font-weight: bold; font-size: 1.1rem; cursor: pointer;
+        }
+
+        /* OYUN EKRANI */
+        #game-timer { font-size: 3rem; color: #ff4444; font-family: 'Permanent Marker'; text-align: center; margin-bottom: 20px; }
+        #hint-area { text-align: center; font-size: 1.5rem; min-height: 120px; display: flex; align-items: center; justify-content: center; }
+        
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
+
     <div id="entrance-screen">
         <img src="200w.webp" class="profile-emoji">
         <h1 class="username">BUNYCR</h1>
-        
         <div class="social-box">
-            <a href="https://youtube.com/@buny.cr19"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png"></a>
-            <a href="https://whatsapp.com/channel/0029VbBUBjgCsU9UpLVu8e2A"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wp-icon"></a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
         </div>
-
         <div class="menu-box">
-            <select id="language-select" class="lang-selector" onchange="changeLanguage()">
+            <select id="lang" class="lang-select" onchange="updateLang()">
                 <option value="tr">🇹🇷 Türkçe</option>
                 <option value="en">🇺🇸 English</option>
                 <option value="az">🇦🇿 Azərbaycanca</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="ko">🇰🇷 한국어</option>
-                <option value="zh">🇨🇳 中文</option>
-                <option value="jp">🇯🇵 日本語</option>
             </select>
-            <input type="text" id="player-name" class="menu-input" placeholder="İSMİNİ YAZ">
-            <button onclick="showModes()" class="btn-green" id="main-btn">ARENAYA KATIL</button>
+            <input type="text" id="pname" class="menu-input" placeholder="İSMİNİ YAZ">
+            <button onclick="goMode()" class="btn-green" id="join-btn">ARENAYA KATIL</button>
         </div>
     </div>
 
     <div id="mode-screen" class="hidden">
-        <h2 id="mode-title" class="username" style="font-size:2.2rem;">MOD SEÇ</h2>
+        <h1 class="username" style="font-size:2rem;" id="m-title">MODUNU SEÇ</h1>
         <div class="mode-container">
-            <button onclick="startSpecificMode('pixel')" class="mode-btn" id="m-pixel">PİKSEL MODU</button>
-            <button onclick="startSpecificMode('desc')" class="mode-btn" id="m-desc">AÇIKLAMA MODU</button>
-            <button onclick="startSpecificMode('emoji')" class="mode-btn" id="m-emoji">EMOJİ MODU</button>
+            <button onclick="play('pixel')" class="mode-btn" style="background:#3b82f6;" id="b-pixel">PİKSEL MODU</button>
+            <button onclick="play('desc')" class="mode-btn" style="background:#22c55e;" id="b-desc">AÇIKLAMA MODU</button>
+            <button onclick="play('emoji')" class="mode-btn" style="background:#a855f7;" id="b-emoji">EMOJİ MODU</button>
         </div>
-        <button onclick="location.reload()" class="btn-back">🔙 ANA MENÜ</button>
     </div>
 
     <div id="active-game" class="hidden">
         <div id="game-timer">05:00</div>
         <div id="hint-area"></div>
-        <input type="text" id="guess-input" class="menu-input" placeholder="..." style="margin-top:20px;">
-        <button onclick="location.reload()" class="btn-back" style="color:#ff4444;">🛑 PES ET</button>
+        <input type="text" class="menu-input" placeholder="..." style="margin-top:20px;">
+        <button onclick="location.reload()" style="background:none; border:none; color:gray; margin-top:20px; width:100%;">PES ET</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const cards = [
+            { n: "Kıvılcım", id: "sparky", emojis: "⚡🔋💥", desc: "Ağır bir elektrik yükü boşaltır." },
+            { n: "Binici", id: "hog-rider", emojis: "🐗🔨👊", desc: "Binalara odaklanan hızlı binici." }
+        ];
+
+        let timer;
+        let time = 300;
+
+        function updateLang() {
+            const l = document.getElementById('lang').value;
+            const t = {
+                tr: {join: "ARENAYA KATIL", mode: "MODUNU SEÇ", p: "PİKSEL", d: "AÇIKLAMA", e: "EMOJİ"},
+                en: {join: "JOIN ARENA", mode: "SELECT MODE", p: "PIXEL", d: "DESCRIPTION", e: "EMOJI"},
+                az: {join: "ARENAYA QOŞUL", mode: "MOD SEÇİN", p: "PİKSEL", d: "TƏSVİR", e: "EMOJİ"}
+            };
+            document.getElementById('join-btn').innerText = t[l].join;
+            document.getElementById('m-title').innerText = t[l].mode;
+            document.getElementById('b-pixel').innerText = t[l].p + " MODU";
+            document.getElementById('b-desc').innerText = t[l].d + " MODU";
+            document.getElementById('b-emoji').innerText = t[l].e + " MODU";
+        }
+
+        function goMode() {
+            if(!document.getElementById('pname').value) return alert("İsim yaz!");
+            document.getElementById('entrance-screen').classList.add('hidden');
+            document.getElementById('mode-screen').classList.remove('hidden');
+        }
+
+        function play(m) {
+            document.getElementById('mode-screen').classList.add('hidden');
+            document.getElementById('active-game').classList.remove('hidden');
+            
+            const card = cards[Math.floor(Math.random()*cards.length)];
+            const area = document.getElementById('hint-area');
+            
+            if(m === 'pixel') area.innerHTML = `<img src="https://royaleapi.github.io/cr-api-assets/cards/${card.id}.png" style="filter:blur(25px); width:120px;">`;
+            else if(m === 'desc') area.innerHTML = `<p style="padding:15px; border:1px solid #a855f7; border-radius:15px;">${card.desc}</p>`;
+            else area.innerHTML = `<h1 style="font-size:4rem;">${card.emojis}</h1>`;
+            
+            timer = setInterval(() => {
+                time--;
+                let min = Math.floor(time/60);
+                let sec = time%60;
+                document.getElementById('game-timer').innerText = `${min}:${sec < 10 ? '0'+sec : sec}`;
+                if(time <= 0) location.reload();
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
