@@ -2,22 +2,21 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUNY-X | Royaledle Global</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>BUNYCR | APP</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="entrance-screen">
         <img src="200w.webp" class="profile-emoji">
         <h1 class="username">BUNYCR</h1>
         
-        <div class="social-icons">
-            <a href="https://youtube.com/@buny.cr19" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png">
-            </a>
-            <a href="https://whatsapp.com/channel/0029VbBUBjgCsU9UpLVu8e2A" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wp-icon">
-            </a>
+        <div class="social-box">
+            <a href="https://youtube.com/@buny.cr19"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png"></a>
+            <a href="https://whatsapp.com/channel/0029VbBUBjgCsU9UpLVu8e2A"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wp-icon"></a>
         </div>
 
         <div class="menu-box">
@@ -38,30 +37,23 @@
         </div>
     </div>
 
-    <div id="game-screen" class="hidden">
-        <div id="mode-selection">
-            <h2 id="mode-title">MODUNU SEÇ</h2>
+    <div id="mode-screen" class="hidden">
+        <h2 id="mode-title" class="username" style="font-size:2.2rem;">MOD SEÇ</h2>
+        <div class="mode-container">
             <button onclick="startSpecificMode('pixel')" class="mode-btn" id="m-pixel">PİKSEL MODU</button>
             <button onclick="startSpecificMode('desc')" class="mode-btn" id="m-desc">AÇIKLAMA MODU</button>
             <button onclick="startSpecificMode('emoji')" class="mode-btn" id="m-emoji">EMOJİ MODU</button>
-
-            <div class="game-footer">
-                <a href="https://youtube.com/@buny.cr19" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png"></a>
-                <a href="https://whatsapp.com/channel/0029VbBUBjgCsU9UpLVu8e2A" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></a>
-            </div>
         </div>
-
-        <div id="active-game" class="hidden">
-            <div id="game-timer">05:00</div>
-            <div id="hint-area"></div>
-            <div class="search-area">
-                <input type="text" id="guess-input" oninput="showList(this.value)" class="menu-input">
-                <div id="autocomplete-list"></div>
-            </div>
-            <button onclick="surrender()" id="btn-pes">PES ET</button>
-            <div id="results-table"></div>
-        </div>
+        <button onclick="location.reload()" class="btn-back">🔙 ANA MENÜ</button>
     </div>
+
+    <div id="active-game" class="hidden">
+        <div id="game-timer">05:00</div>
+        <div id="hint-area"></div>
+        <input type="text" id="guess-input" class="menu-input" placeholder="..." style="margin-top:20px;">
+        <button onclick="location.reload()" class="btn-back" style="color:#ff4444;">🛑 PES ET</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
