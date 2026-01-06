@@ -1,32 +1,102 @@
-body { background: #000; color: white; font-family: 'Arial Black', sans-serif; margin: 0; display: flex; justify-content: center; overflow-x: hidden; }
-.hidden { display: none !important; }
+body { 
+    background: #000; 
+    color: white; 
+    font-family: 'Arial Black', sans-serif; 
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    overflow: hidden; 
+}
 
-#entrance-screen { height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #1a0b2e 0%, #000 100%); }
-.profile-emoji { width: 160px; z-index: 2; position: relative; filter: drop-shadow(0 0 20px #a855f7); }
-.emoji-glow { position: absolute; width: 200px; height: 200px; background: #a855f7; filter: blur(60px); opacity: 0.3; }
-.username { font-size: 3rem; font-style: italic; color: #fff; text-shadow: 0 0 15px #a855f7; margin: 10px 0 5px 0; }
+#entrance-screen { 
+    height: 100vh; 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    /* İLK SEVDİĞİN MOR ARKA PLAN */
+    background: radial-gradient(circle, #2d1350 0%, #000 100%); 
+}
 
-/* Sosyal Medya */
-.social-icons { display: flex; gap: 20px; margin-bottom: 20px; justify-content: center; }
-.social-icons img { width: 45px; height: 45px; transition: 0.3s; }
+.profile-section { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    position: relative;
+}
+
+.profile-emoji { 
+    width: 130px; 
+    z-index: 2; 
+    filter: drop-shadow(0 0 20px #a855f7); 
+}
+
+.username { 
+    font-size: 2.8rem; 
+    color: #fff; 
+    text-shadow: 0 0 15px #a855f7; 
+    margin: 10px 0; 
+    font-style: italic;
+}
+
+/* LOGOLARI KÜÇÜLTEN VE YAN YANA DİZEN KISIM */
+.social-icons { 
+    display: flex; 
+    gap: 25px; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+
+.social-icons img { 
+    width: 40px !important; 
+    height: 40px !important; 
+    object-fit: contain; 
+    transition: 0.3s;
+}
+
 .icon-yt img { filter: drop-shadow(0 0 10px #ff0000); }
 .icon-wp img { filter: drop-shadow(0 0 10px #25d366); }
 .social-icons a:hover img { transform: scale(1.2); }
 
-.menu-box { background: rgba(20, 20, 20, 0.8); border: 2px solid #a855f7; padding: 25px; border-radius: 25px; width: 300px; display: flex; flex-direction: column; gap: 12px; }
-.menu-input { background: #111; border: 1px solid #444; color: white; padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; }
-button { padding: 15px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
-.btn-blue { background: #3b82f6; color: white; }
-.btn-green { background: #22c55e; color: white; }
-.btn-black { background: #000; color: white; border: 1px solid #444; }
-button:hover { transform: scale(1.05); }
+.menu-box { 
+    background: rgba(0, 0, 0, 0.6); 
+    border: 2px solid #a855f7; 
+    padding: 25px; 
+    border-radius: 30px; 
+    width: 280px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    backdrop-filter: blur(10px);
+}
 
-/* Oyun Ekranı */
-#game-screen { width: 100%; max-width: 500px; padding: 20px; text-align: center; }
-.game-logo { color: #a855f7; font-size: 2.5rem; font-style: italic; margin-bottom: 20px; }
-#guess-input { width: 100%; padding: 15px; border-radius: 10px; border: none; background: #222; color: white; }
-.guess-row { display: flex; gap: 5px; margin-bottom: 5px; }
-.cell { flex: 1; padding: 10px; border-radius: 5px; background: #111; font-size: 0.8rem; border: 1px solid #333; }
-.correct { background: #16a34a !important; }
-.wrong { background: #dc2626 !important; }
-.partial { background: #ca8a04 !important; }
+.menu-input { 
+    background: #111; 
+    border: 1px solid #a855f7; 
+    color: white; 
+    padding: 15px; 
+    border-radius: 15px; 
+    text-align: center; 
+    font-weight: bold;
+}
+
+button { 
+    padding: 15px; 
+    border-radius: 15px; 
+    border: none; 
+    font-weight: 900; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: 0.2s;
+}
+
+.btn-blue { background: #3b82f6; color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+.btn-green { background: #22c55e; color: white; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4); }
+.btn-black { background: #000; color: white; border: 1px solid #444; }
+button:hover { transform: translateY(-3px); }
+
+.hidden { display: none !important; }
