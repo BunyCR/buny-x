@@ -8,15 +8,15 @@
 </head>
 <body>
     <div id="entrance-screen">
-        <img src="200w.webp" class="profile-emoji" alt="BUNY Logo">
+        <img src="200w.webp" class="profile-emoji">
         <h1 class="username">BUNYCR</h1>
         
         <div class="social-icons">
             <a href="https://youtube.com/@buny.cr19" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" style="width: 40px;">
             </a>
             <a href="https://whatsapp.com/channel/0029VbBUBjgCsU9UpLVu8e2A" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width: 40px;">
             </a>
         </div>
 
@@ -33,7 +33,7 @@
                 <option value="ru">🇷🇺 Русский</option>
                 <option value="jp">🇯🇵 日本語</option>
             </select>
-            <input type="text" id="player-name" class="menu-input" placeholder="İSMİNİ YAZ">
+            <input type="text" id="player-name" class="menu-input">
             <button onclick="showModes()" class="btn-green" id="main-btn">ARENAYA KATIL</button>
         </div>
     </div>
@@ -41,25 +41,21 @@
     <div id="game-screen" class="hidden">
         <div id="mode-selection">
             <h2 id="mode-title">MODUNU SEÇ</h2>
-            <button onclick="startSpecificMode('pixel')" class="btn-blue mode-btn" id="m-pixel">PİKSEL MODU</button>
-            <button onclick="startSpecificMode('desc')" class="btn-green mode-btn" id="m-desc">AÇIKLAMA MODU</button>
-            <button onclick="startSpecificMode('emoji')" class="btn-black mode-btn" id="m-emoji">EMOJİ MODU</button>
+            <button onclick="startSpecificMode('pixel')" class="btn-blue" id="m-pixel">PİKSEL MODU</button>
+            <button onclick="startSpecificMode('desc')" class="btn-green" id="m-desc">AÇIKLAMA MODU</button>
+            <button onclick="startSpecificMode('emoji')" class="btn-black" id="m-emoji">EMOJİ MODU</button>
         </div>
-
         <div id="active-game" class="hidden">
             <div id="game-timer">05:00</div>
             <div id="hint-area"></div>
-            
             <div class="search-area">
                 <input type="text" id="guess-input" oninput="showList(this.value)" class="menu-input">
                 <div id="autocomplete-list"></div>
             </div>
-            
             <button onclick="surrender()" id="btn-pes">PES ET</button>
             <div id="results-table"></div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
-                </html>
+</html>
